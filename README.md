@@ -73,6 +73,19 @@ after
     E---H'---I'---J'  topicA
 ```
 
+### The danger of rebasing
+
+rebase 本质上是对已有的 commits 进行修改, 
+如果你的历史提交中包含了其他合作者的 commits.
+当你进行了 rebase, 并 push 到远端
+(通常会提示 conflicts, 但是架不住有人使用 git push --force),
+则会打乱整个 repo 的 commit history,
+导致其他合作者被迫进行 re-merge. 
+所以 git rebase 的红线为
+
+**Do not rebase commits that exists outside your repository and that 
+people have based work on.**
+
 ## Undo
 
 ### Discard changes to a file
@@ -97,6 +110,14 @@ git branch -d branch_name
 
 ```git
 git push origin --delete branch_name
+```
+
+## Apply
+
+Apply changes within a specific directory from another branch 
+to the current branch.
+```git
+git restore --source=<another_branch> <dir>
 ```
 
 ## Submodule
